@@ -43,6 +43,10 @@
 <script src="../pkgdown.js"></script>
 <link href="../tidyverse-2.css" rel="stylesheet">
 
+<!--optional theme-->
+<link href="../.css" rel="stylesheet">
+
+
 
 
 <meta property="og:title" content="reprex options — reprex_options" />
@@ -119,7 +123,7 @@ your .Rprofile." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -179,7 +183,7 @@ your .Rprofile." />
   <a href="../news/index.html">Changelog</a>
 </li>
         <li>
-  <a href="https://github.com/tidyverse/reprex">
+  <a href="https://github.com/tidyverse/reprex/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -231,20 +235,20 @@ in the article
 
 <p>Here's code you could put in <code>.Rprofile</code> to set reprex options. It would be
 rare to want non-default behaviour for all of these! We only do so here for
-the sake of exposition:</p><pre>options(
-  reprex.advertise       = FALSE,
-  reprex.session_info    = TRUE,
-  reprex.style           = TRUE,
-  reprex.html_preview    = FALSE,
-  reprex.comment         = "#;-)",
-  reprex.tidyverse_quiet = FALSE,
-  reprex.std_out_err     = TRUE,
-  reprex.venue           = "html", # NOTE: only affects reprex_selection()!
-  reprex.highlight.hl_style  = "acid", # NOTE: only affects RTF venue
-  reprex.highlight.font      = "Andale Mono Regular",
-  reprex.highlight.font_size = 35,
-  reprex.highlight.other     = "--line-numbers"
-)
+the sake of exposition:</p><pre><span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span>
+  reprex.advertise       <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  reprex.session_info    <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  reprex.style           <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  reprex.html_preview    <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  reprex.comment         <span class='op'>=</span> <span class='st'>"#;-)"</span>,
+  reprex.tidyverse_quiet <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  reprex.std_out_err     <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  reprex.venue           <span class='op'>=</span> <span class='st'>"html"</span>, <span class='co'># NOTE: only affects reprex_selection()!</span>
+  reprex.highlight.hl_style  <span class='op'>=</span> <span class='st'>"acid"</span>, <span class='co'># NOTE: only affects RTF venue</span>
+  reprex.highlight.font      <span class='op'>=</span> <span class='st'>"Andale Mono Regular"</span>,
+  reprex.highlight.font_size <span class='op'>=</span> <span class='fl'>35</span>,
+  reprex.highlight.other     <span class='op'>=</span> <span class='st'>"--line-numbers"</span>
+<span class='op'>)</span>
 </pre>
 
 <p>The function <code>usethis::edit_r_profile()</code> is handy for creating and/or opening
@@ -257,7 +261,7 @@ your <code>.Rprofile</code>.</p>
 
     
 
-<p>Arguments that appear like so in <code><a href='reprex.html'>reprex()</a></code>:</p><pre>reprex(..., arg = opt(DEFAULT), ...)
+<p>Arguments that appear like so in <code><a href='reprex.html'>reprex()</a></code>:</p><pre><span class='fu'><a href='reprex.html'>reprex</a></span><span class='op'>(</span><span class='va'>...</span>, arg <span class='op'>=</span> <span class='fu'>opt</span><span class='op'>(</span><span class='va'>DEFAULT</span><span class='op'>)</span>, <span class='va'>...</span><span class='op'>)</span>
 </pre>
 
 <p>get their value according to this logic:</p><pre>user-specified value or, if not given,
@@ -265,18 +269,16 @@ your <code>.Rprofile</code>.</p>
     DEFAULT
 </pre>
 
-<p>It's shorthand for:</p><pre>f(..., arg = getOption("reprex.arg", DEFAULT), ...)
+<p>It's shorthand for:</p><pre><span class='fu'>f</span><span class='op'>(</span><span class='va'>...</span>, arg <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"reprex.arg"</span>, <span class='va'>DEFAULT</span><span class='op'>)</span>, <span class='va'>...</span><span class='op'>)</span>
 </pre>
 
 <p>This is not an exported function and should not be called directly.</p>
 
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#explaining-the-opt-helper">Explaining the <code>opt()</code> helper</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
