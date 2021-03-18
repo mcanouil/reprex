@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Render a reprex — reprex_addin • reprex</title>
+<title>Render a reprex, conveniently — reprex_addin • reprex</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -49,7 +49,7 @@
 
 
 
-<meta property="og:title" content="Render a reprex — reprex_addin" />
+<meta property="og:title" content="Render a reprex, conveniently — reprex_addin" />
 <meta property="og:description" content="reprex_addin() opens an RStudio gadget and
 addin that allows you to say
 where the reprex source is (clipboard? current selection? active file?
@@ -58,7 +58,8 @@ reprex&quot; in the RStudio Addins menu.
 reprex_selection() is an
 addin that reprexes the current
 selection, optionally customised by options. Appears as &quot;Reprex selection&quot;
-in the RStudio Addins menu. Heavy users might want to create a keyboard shortcut." />
+in the RStudio Addins menu. Heavy users might want to create a keyboard shortcut.
+Suggested shortcut: Cmd + Shift + R (macOS) or Ctrl + Shift + R (Windows)." />
 <meta property="og:image" content="https://reprex.tidyverse.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -103,16 +104,13 @@ in the RStudio Addins menu. Heavy users might want to create a keyboard shortcut
         <a class="navbar-brand" href="../index.html">reprex</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0.9001</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9002</span>
         </div>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="../articles/reprex-dos-and-donts.html">Reprex do's and don'ts</a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -123,31 +121,43 @@ in the RStudio Addins menu. Heavy users might want to create a keyboard shortcut
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/articles/datapasta-reprex.html">Using datapasta with reprex</a>
-    </li>
-    <li>
-      <a href="../articles/articles/learn-reprex.html">How to use reprex</a>
-    </li>
-    <li>
-      <a href="../articles/articles/magic-reprex.html">Magic reprex</a>
+      <a href="../articles/reprex-dos-and-donts.html">Reprex do's and don'ts</a>
     </li>
     <li>
       <a href="../articles/articles/rtf.html">reprex venue RTF</a>
     </li>
     <li>
-      <a href="../articles/articles/suppress-startup-messages.html">Suppress package startup messages</a>
+      <a href="../articles/articles/datapasta-reprex.html">Using datapasta with reprex</a>
     </li>
     <li>
-      <a href="../articles/reprex-dos-and-donts.html">Reprex do's and don'ts</a>
+      <a href="../articles/articles/suppress-startup-messages.html">Suppress package startup messages</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/index.html">More...</a>
     </li>
   </ul>
 </li>
-<li>
-  <a href="../news/index.html">Changelog</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    News
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Blog posts</li>
+    <li>
+      <a href="https://www.tidyverse.org/blog/2021/02/reprex-1-0-0/">reprex 1.0.0</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../news/index.html">Change log</a>
+    </li>
+  </ul>
 </li>
         <li>
   <a href="https://github.com/tidyverse/reprex/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -164,7 +174,7 @@ in the RStudio Addins menu. Heavy users might want to create a keyboard shortcut
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Render a reprex</h1>
+    <h1>Render a reprex, conveniently</h1>
     <small class="dont-index">Source: <a href='https://github.com/tidyverse/reprex/blob/master/R/reprex-addin.R'><code>R/reprex-addin.R</code></a></small>
     <div class="hidden name"><code>reprex_addin.Rd</code></div>
     </div>
@@ -178,7 +188,8 @@ reprex" in the RStudio Addins menu.</p>
 <p><code>reprex_selection()</code> is an
 <a href='http://rstudio.github.io/rstudioaddins/'>addin</a> that reprexes the current
 selection, optionally customised by options. Appears as "Reprex selection"
-in the RStudio Addins menu. Heavy users might want to <a href='https://support.rstudio.com/hc/en-us/articles/206382178-Customizing-Keyboard-Shortcuts'>create a keyboard shortcut</a>.</p>
+in the RStudio Addins menu. Heavy users might want to <a href='https://support.rstudio.com/hc/en-us/articles/206382178-Customizing-Keyboard-Shortcuts'>create a keyboard shortcut</a>.
+Suggested shortcut: Cmd + Shift + R (macOS) or Ctrl + Shift + R (Windows).</p>
     </div>
 
     <pre class="usage"><span class='fu'>reprex_addin</span><span class='op'>(</span><span class='op'>)</span>
@@ -193,12 +204,18 @@ in the RStudio Addins menu. Heavy users might want to <a href='https://support.r
       <td><p>Character. Must be one of the following (case insensitive):</p><ul>
 <li><p>"gh" for <a href='https://github.github.com/gfm/'>GitHub-Flavored Markdown</a>, the
 default</p></li>
-<li><p>"r" for a runnable R script, with commented output interleaved</p></li>
+<li><p>"r" for a runnable R script, with commented output interleaved. Also useful
+for <a href='https://slack.com/intl/en-ca/slack-tips/share-code-snippets'>Slack code snippets</a>;
+select "R" from the "Type" drop-down menu to enjoy nice syntax
+highlighting.</p></li>
 <li><p>"rtf" for
 <a href='https://en.wikipedia.org/wiki/Rich_Text_Format'>Rich Text Format</a>
 (not supported for un-reprexing)</p></li>
 <li><p>"html" for an HTML fragment suitable for inclusion in a larger HTML
 document (not supported for un-reprexing)</p></li>
+<li><p>"slack" for pasting into a Slack message. Works best if you opt out of
+Slack's WYSIWYG interface and, instead, go to <strong>Preferences &gt; Advanced</strong>
+and select "Format messages with markup".</p></li>
 <li><p>"so" for
 <a href='https://stackoverflow.com/editing-help#syntax-highlighting'>Stack Overflow Markdown</a>.
 Note: this is just an alias for "gh", since Stack Overflow started to

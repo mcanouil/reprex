@@ -51,7 +51,7 @@
 
 <meta property="og:title" content="reprex options — reprex_options" />
 <meta property="og:description" content="Some reprex() behaviour can be controlled via an option, providing a way
-for the user to set personal defaults. The pattern for option names is
+for the user to set personal defaults. The pattern for such option names is
 reprex.&amp;lt;arg&amp;gt;, where &amp;lt;arg&amp;gt; is an argument of reprex(). Here are the main
 ones:
 reprex.advertise
@@ -63,11 +63,18 @@ reprex.tidyverse_quiet
 reprex.std_out_err
 
 
-A few more options exist, but are only consulted in specific situations:
-reprex.venue: Only consulted by reprex_selection(). reprex()
-itself reveals the possible values for venue in the &quot;Usage&quot; section
-of its help file and defaults to the first value, in the usual
-match.arg() way.
+A few more options exist, but are only relevant to specific situations:
+reprex.venue: Can be used to control the venue used by the
+reprex_selection() addin.
+reprex.current_venue: Read-only option that is set during
+reprex_render(). Other packages that want to generate reprex-compatible
+output can consult it via getOption(&quot;reprex.current_venue&quot;), if they want
+to tailor their output to the venue.
+reprex.clipboard: When FALSE, reprex makes no attempt to access the
+user's clipboard, ever. This exists mostly for internal use, i.e. we set it
+to FALSE when we detect use from RStudio Server. But a user could set
+this to FALSE to explicitly opt-out of clipboard functionality. A Linux
+user with no intention of installing xclip or xsel might also do this.
 reprex.highlight.hl_style: Only relevant to venue = &quot;rtf. Details are
 in the article
 reprex venue RTF.
@@ -140,16 +147,13 @@ your .Rprofile." />
         <a class="navbar-brand" href="../index.html">reprex</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0.9001</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9002</span>
         </div>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="../articles/reprex-dos-and-donts.html">Reprex do's and don'ts</a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -160,31 +164,43 @@ your .Rprofile." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/articles/datapasta-reprex.html">Using datapasta with reprex</a>
-    </li>
-    <li>
-      <a href="../articles/articles/learn-reprex.html">How to use reprex</a>
-    </li>
-    <li>
-      <a href="../articles/articles/magic-reprex.html">Magic reprex</a>
+      <a href="../articles/reprex-dos-and-donts.html">Reprex do's and don'ts</a>
     </li>
     <li>
       <a href="../articles/articles/rtf.html">reprex venue RTF</a>
     </li>
     <li>
-      <a href="../articles/articles/suppress-startup-messages.html">Suppress package startup messages</a>
+      <a href="../articles/articles/datapasta-reprex.html">Using datapasta with reprex</a>
     </li>
     <li>
-      <a href="../articles/reprex-dos-and-donts.html">Reprex do's and don'ts</a>
+      <a href="../articles/articles/suppress-startup-messages.html">Suppress package startup messages</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/index.html">More...</a>
     </li>
   </ul>
 </li>
-<li>
-  <a href="../news/index.html">Changelog</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    News
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Blog posts</li>
+    <li>
+      <a href="https://www.tidyverse.org/blog/2021/02/reprex-1-0-0/">reprex 1.0.0</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../news/index.html">Change log</a>
+    </li>
+  </ul>
 </li>
         <li>
   <a href="https://github.com/tidyverse/reprex/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -208,7 +224,7 @@ your .Rprofile." />
 
     <div class="ref-description">
     <p>Some <code><a href='reprex.html'>reprex()</a></code> behaviour can be controlled via an option, providing a way
-for the user to set personal defaults. The pattern for option names is
+for the user to set personal defaults. The pattern for such option names is
 <code>reprex.&lt;arg&gt;</code>, where <code>&lt;arg&gt;</code> is an argument of <code><a href='reprex.html'>reprex()</a></code>. Here are the main
 ones:</p><ul>
 <li><p><code>reprex.advertise</code></p></li>
@@ -220,11 +236,18 @@ ones:</p><ul>
 <li><p><code>reprex.std_out_err</code></p></li>
 </ul>
 
-<p>A few more options exist, but are only consulted in specific situations:</p><ul>
-<li><p><code>reprex.venue</code>: Only consulted by <code><a href='reprex_addin.html'>reprex_selection()</a></code>. <code><a href='reprex.html'>reprex()</a></code>
-itself reveals the possible values for <code>venue</code> in the "Usage" section
-of its help file and defaults to the first value, in the usual
-<code><a href='https://rdrr.io/r/base/match.arg.html'>match.arg()</a></code> way.</p></li>
+<p>A few more options exist, but are only relevant to specific situations:</p><ul>
+<li><p><code>reprex.venue</code>: Can be used to control the <code>venue</code> used by the
+<code><a href='reprex_addin.html'>reprex_selection()</a></code> addin.</p></li>
+<li><p><code>reprex.current_venue</code>: Read-only option that is set during
+<code><a href='reprex_render.html'>reprex_render()</a></code>. Other packages that want to generate reprex-compatible
+output can consult it via <code><a href='https://rdrr.io/r/base/options.html'>getOption("reprex.current_venue")</a></code>, if they want
+to tailor their output to the <code>venue</code>.</p></li>
+<li><p><code>reprex.clipboard</code>: When <code>FALSE</code>, reprex makes no attempt to access the
+user's clipboard, ever. This exists mostly for internal use, i.e. we set it
+to <code>FALSE</code> when we detect use from RStudio Server. But a user could set
+this to <code>FALSE</code> to explicitly opt-out of clipboard functionality. A Linux
+user with no intention of installing <code>xclip</code> or <code>xsel</code> might also do this.</p></li>
 <li><p><code>reprex.highlight.hl_style</code>: Only relevant to <code>venue = "rtf</code>. Details are
 in the article
 <a href='https://reprex.tidyverse.org/articles/articles/rtf.html'>reprex venue RTF</a>.</p></li>
